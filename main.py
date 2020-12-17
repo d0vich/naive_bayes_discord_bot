@@ -17,7 +17,7 @@ client = discord.Client()
 
 sad_words=["sad","depressed","unhappy","angry","miserable","despressing"]
 
-starter_encouragements = [
+starter_negative_responds = [
   "Don't be an asshole",
   "Now this is rude",
   "I don't think that we can go anywhere with that attitude",
@@ -27,6 +27,18 @@ starter_encouragements = [
    "I mean is this how you treat your friends",
    "I thought we were friends",
    "I find this approach quite useless"
+]
+
+starter_positive_responds = [
+  "Oh, this is very kind of you.",
+  "Thanks!",
+  "Thank you very much!",
+   "Actually, I think you are the best.",
+   "Be that guy :).",
+   "Have an awesome day :).",
+   "I guess we will make good friends.",
+   "Ohh, that's so sweeeeeet.",
+   "Nice approach, well done mate."
 ]
 
 if "responding" not in db.keys():
@@ -75,13 +87,16 @@ async def on_message(message):
     await message.channel.send(quote)
 
   if db["responding"]:
-    options = starter_encouragements
+    options = starter_negative_responds
     
     if "encouragements" in db.keys():
       options = options + db["encouragements"]
 
     if is_negative == "Negative":
       await message.channel.send(random.choice(options))
+    
+    if is_negative == "Positive":
+      await message.channel.send(random.choice(starter_positive_responds))
 
       
 
