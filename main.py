@@ -74,7 +74,7 @@ async def on_message(message):
   msg = message.content
 
   custom_tokens = remove_noise(word_tokenize(msg))
-  is_negative = classifier.classify(dict([token, True] for token in custom_tokens))
+  sentiment = classifier.classify(dict([token, True] for token in custom_tokens))
 
   if message.author == client.user: 
     return
@@ -92,10 +92,10 @@ async def on_message(message):
     if "encouragements" in db.keys():
       options = options + db["encouragements"]
 
-    if is_negative == "Negative":
+    if sentiment == "Negative":
       await message.channel.send(random.choice(options))
     
-    if is_negative == "Positive":
+    if sentiment == "Positive":
       await message.channel.send(random.choice(starter_positive_responds))
 
       
