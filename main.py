@@ -5,17 +5,16 @@ import json
 import random
 from replit import db
 from keep_alive import keep_alive
-
-from sentimentclassifier import classifier
-from sentimentclassifier import remove_noise
+import pickle 
+from noise_remover import remove_noise
 from nltk.tokenize import word_tokenize
 
-
+with open('model_pickle','rb') as file:
+    classifier = pickle.load(file)
 
 
 client = discord.Client()
 
-sad_words=["sad","depressed","unhappy","angry","miserable","despressing"]
 
 starter_negative_responds = [
   "Don't be an asshole",
